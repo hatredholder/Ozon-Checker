@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load colorize %}
+{% block content %}
+<!-- Modal -->
+    <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавить товар для отслеживания цены</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" autocomplete="off">
+                        {% csrf_token %}
+                        {{form}}
+                        <button type="submit" class="btn btn-primary mt-2">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addItemModal">Добавить ссылку</button>
+            <a href="{% url 'update-prices' %}">
+                <button class="btn btn-info">Обновить цены</button>
+            </a>
+        </div>
+        <div class="col" style="text-align:right">
+            <div>Количество отслеживаемых товаров: {{items_no}}</div>
+            <div>Товары со скидкой: {{no_discounted}}</div>
+        </div>
+    </div>
+    {% if qs %}
+        {% for item in qs %}
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5>{{item.name}}</h5>
+                <a href="{% url 'delete' item.pk %}"><button class="btn btn-danger">Удалить</button></a>
+            </div>
+            <div class="card-body">
+                <div class="blockquote">
+                    <div>Текущая Цена (₽): {{item.current_price}}</div>
+                    <div>Старая Цена (₽): {{item.old_price}}</div>
+                    <div>Разница в Цене (₽): {{item.price_difference|colorize}}</div>
+                    <div>URL Ссылка: <a href="{{item.url}}">{{item.url}}</a></div>
+                </div>
+            </div>
+          </div>
+        {% endfor %}
+    {% else %}
+        <h3>Нет отслеживаемых предметов..</h3>
+    {% endif %}
+{% endblock content %}
