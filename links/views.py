@@ -25,8 +25,8 @@ def home_view(request):
     qs = Link.objects.all()
     items_no = qs.count()
 
+    discount_list = []
     if items_no > 0:
-        discount_list = []
         for item in qs:
             if item.old_price > item.current_price:
                 discount_list.append(item)
@@ -36,6 +36,7 @@ def home_view(request):
         'qs':qs,
         'items_no':items_no,
         'no_discounted':no_discounted,
+        'discount_list': discount_list,
         'form':form,
         'error':error
     }
