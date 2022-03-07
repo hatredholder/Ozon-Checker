@@ -4,7 +4,7 @@ Made on Django with the use of BeautifulSoup and Selenium.
 
 # To do/to add:
 
-Add a discounted items list page/modal;
+Add a discounted items list page/modal; ✓ Done (07.03.22)
 
 Change delete functionality logic so it uses a modal instead of opening another page;
 
