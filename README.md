@@ -4,6 +4,8 @@ Made on Django with the use of BeautifulSoup and Selenium.
 
 # To do/to add:
 
+!!! Add multithreading so the price checking process is faster;
+
 Change delete functionality logic so it uses a modal instead of opening another page;
 
 Add cancel functionality to delete;
