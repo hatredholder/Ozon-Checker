@@ -45,7 +45,6 @@ def home_view(request):
 
 class LinkDeleteView(DeleteView):
     model = Link
-    template_name = 'links/confirm_del.html'
     success_url = reverse_lazy('home')
 
 def update_prices(request):

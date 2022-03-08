@@ -54,6 +54,7 @@
         </div>
     </div>
 
+
     <div class="row">
         <div class="col">
             <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addItemModal">Добавить ссылку</button>
@@ -70,7 +71,7 @@
         <div class="card mt-3">
             <div class="card-header">
                 <h5>{{item.name}}</h5>
-                <a href="{% url 'delete' item.pk %}"><button class="btn btn-danger">Удалить</button></a>
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal">Удалить</button>
             </div>
             <div class="card-body">
                 <div class="blockquote">
@@ -81,6 +82,26 @@
                 </div>
             </div>
           </div>
+
+    <!-- Modal 3 -->
+    <div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Удалить товар</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Вы уверены что хотите удалить выбранный товар?</p>
+                    <form id="my_form" method="post" action="{% url 'delete' item.pk %}">
+                        {% csrf_token %}
+                    </form>
+                    <a onclick="document.getElementById('my_form').submit();"><button class="btn btn-danger">Удалить</button></a>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" aria-label="Close">Отмена</button>
+                </div>
+            </div>
+        </div>
+    </div>
         {% endfor %}
     {% else %}
         <h3>Нет отслеживаемых предметов..</h3>
