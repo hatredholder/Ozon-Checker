@@ -20,41 +20,6 @@
         </div>
     </div>
 
-<!-- Modal 2 -->
-    <div class="modal fade" id="discountedItemsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Предметы со скидкой</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {% if discount_list %}
-                        {% for item in discount_list %}
-                        <div class="card mt-3">
-                            <div class="card-header">
-                                <h5>{{item.name}}</h5>
-                                <a href="{% url 'delete' item.pk %}"><button class="btn btn-danger">Удалить</button></a>
-                            </div>
-                        <div class="card-body">
-                            <div class="blockquote">
-                            <div>Текущая Цена (₽): {{item.current_price}}</div>
-                            <div>Старая Цена (₽): {{item.old_price}}</div>
-                            <div>Разница в Цене (₽): {{item.price_difference|colorize}}</div>
-                            <div>URL Ссылка: <a href="{{item.url}}">{{item.url}}</a></div>
-                        </div>
-                        </div>
-                        </div>
-                        {% endfor %}
-                    {% else %}
-                        Нет предметов по скидке..
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-
-
     <div class="row">
         <div class="col">
             <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addItemModal">Добавить ссылку</button>
@@ -82,6 +47,40 @@
                 </div>
             </div>
           </div>
+
+<!-- Modal 2 -->
+    <div class="modal fade" id="discountedItemsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Предметы со скидкой</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {% if discount_list %}
+                        {% for item in discount_list %}
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5>{{item.name}}</h5>
+                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal">Удалить</button>
+                            </div>
+                        <div class="card-body">
+                            <div class="blockquote">
+                            <div>Текущая Цена (₽): {{item.current_price}}</div>
+                            <div>Старая Цена (₽): {{item.old_price}}</div>
+                            <div>Разница в Цене (₽): {{item.price_difference|colorize}}</div>
+                            <div>URL Ссылка: <a href="{{item.url}}">{{item.url}}</a></div>
+                        </div>
+                        </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        Нет предметов по скидке..
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>          
 
     <!-- Modal 3 -->
     <div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
