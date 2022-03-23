@@ -1,24 +1,7 @@
 {% extends 'base.html' %}
 {% load colorize %}
 {% block content %}
-<!-- Modal 1 -->
-    <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Добавить товар для отслеживания цены</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="POST" autocomplete="off">
-                        {% csrf_token %}
-                        {{form}}
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="row">
         <div class="col">
@@ -36,7 +19,7 @@
         <div class="card mt-3">
             <div class="card-header">
                 <h5>{{item.name}}</h5>
-                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal">Удалить</button>
+                <a href="{% url 'delete' item.pk %}"class="btn btn-danger">Удалить</a>
             </div>
             <div class="card-body">
                 <div class="blockquote">
@@ -47,6 +30,29 @@
                 </div>
             </div>
           </div>
+        {% endfor %}
+    {% else %}
+        <h3>Нет отслеживаемых предметов..</h3>
+    {% endif %}
+
+<!-- Modal 1 -->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавить товар для отслеживания цены</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="POST" autocomplete="off">
+                    {% csrf_token %}
+                    {{form}}
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal 2 -->
     <div class="modal fade" id="discountedItemsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -62,7 +68,7 @@
                         <div class="card mt-3">
                             <div class="card-header">
                                 <h5>{{item.name}}</h5>
-                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal">Удалить</button>
+                                <a class="btn btn-danger" href="{% url 'delete' item.pk %}">Удалить</a>
                             </div>
                         <div class="card-body">
                             <div class="blockquote">
@@ -81,28 +87,4 @@
             </div>
         </div>
     </div>          
-
-    <!-- Modal 3 -->
-    <div class="modal fade" id="deleteItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Удалить товар</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Вы уверены что хотите удалить выбранный товар?</p>
-                    <form id="my_form" method="post" action="{% url 'delete' item.pk %}">
-                        {% csrf_token %}
-                    </form>
-                    <a onclick="document.getElementById('my_form').submit();"><button class="btn btn-danger">Удалить</button></a>
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal" aria-label="Close">Отмена</button>
-                </div>
-            </div>
-        </div>
-    </div>
-        {% endfor %}
-    {% else %}
-        <h3>Нет отслеживаемых предметов..</h3>
-    {% endif %}
 {% endblock content %}
