@@ -2,6 +2,7 @@ import time
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
 from fake_useragent import UserAgent
 
 
@@ -18,6 +19,7 @@ def get_info(url):
     driver = webdriver.Chrome(service=service, options=options)
 
     try:
+        WebDriverWait
         driver.get(url)
         time.sleep(1)
         soup = BeautifulSoup(driver.page_source, "lxml")
@@ -25,8 +27,8 @@ def get_info(url):
         price = int("".join([i for i in soup.find(attrs={"slot":"content"}).next_element.next_sibling.next_element.next_element.next_element.text if i.isnumeric()]))
         return name, price
 
-    except Exception as e:
-        print(e)
+    except Exception:
+        pass
     finally:
         driver.close()
         driver.quit()

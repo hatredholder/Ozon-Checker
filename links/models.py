@@ -1,5 +1,4 @@
 from django.db import models
-from .utils import get_info
 
 
 class Link(models.Model):
@@ -16,19 +15,3 @@ class Link(models.Model):
 
     class Meta:
         ordering = ('price_difference','-created')
-
-    def save(self, *args, **kwargs):
-        name, price = get_info(self.url)
-        old_price = self.current_price
-        if self.current_price:
-            if price != old_price:
-                diff = price - old_price
-                self.price_difference = round(diff, 2)
-                self.old_price = old_price
-        else:
-            self.old_price = 0
-            self.price_difference = 0
-
-        self.name = name
-        self.current_price = price        
-        super().save(*args, **kwargs)

@@ -1,9 +1,10 @@
+from multiprocessing import Pool
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
+from django.views.generic import DeleteView
 from .forms import AddLinkForm
 from .models import Link
-from django.views.generic import DeleteView
-
+from .utils import get_info
 
 def home_view(request):
     no_discounted = 0
@@ -13,8 +14,10 @@ def home_view(request):
 
     if request.method == 'POST':
         try:
-            if form.is_valid():
-                form.save()
+            form_name, form_current_price = get_info(form['url'].value())
+            form = form.save(commit=False)
+            form.name, form.current_price = form_name, form_current_price
+            form.save()
         except AttributeError:
             error = "Oops! Couldn't get the name or the price.."
         except: 
@@ -49,6 +52,21 @@ class LinkDeleteView(DeleteView):
 
 def update_prices(request):
     qs = Link.objects.all()
-    for link in qs:
-        link.save()
+    links = []
+
+    for i in qs:
+        links.append(i.url)
+    p = Pool(processes=len(links))
+    result = p.map(get_info, links)
+    p.close()
+    num = 0
+    for i in qs:
+        if result[num][1] != i.current_price:
+            i.old_price = i.current_price
+            i.current_price = result[num][1]
+            diff = result[num][1] - i.old_price
+            i.price_difference = round(diff, 2)
+            i.save()
+        num += 1
+    print('result', result)
     return redirect('home')
