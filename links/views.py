@@ -68,5 +68,4 @@ def update_prices(request):
             i.price_difference = round(diff, 2)
             i.save()
         num += 1
-    print('result', result)
     return redirect('home')
