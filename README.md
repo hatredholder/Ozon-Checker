@@ -4,11 +4,11 @@ Made on Django with the use of BeautifulSoup and Selenium.
 
 # To do/to add:
 
-Create a version 2 where logic will be inside the views.py instead of save method in class Link in models.py,
+Update logic so it will be inside the views.py instead of the save method Link model,
 add multiprocessing so updating items price will be faster;
 ✓ Done (28.03.22)
 
-Updated delete confirm template; 
+Update delete confirm template; 
 ✓ Done (23.03.22)
 
 Add cancel functionality to delete; 
