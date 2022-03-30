@@ -19,9 +19,9 @@ def home_view(request):
             form.name, form.current_price = form_name, form_current_price
             form.save()
         except AttributeError:
-            error = "Oops! Couldn't get the name or the price.."
+            error = "Ой! Не удалось получить название или цену товара.."
         except: 
-            error = "Oops! Something went wrong.."
+            error = "Ой! Ссылка которую вы ввели недействительна.."
     
     form = AddLinkForm()
 

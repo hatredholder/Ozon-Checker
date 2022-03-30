@@ -2,6 +2,11 @@
 {% load colorize %}
 {% block content %}
 
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+  </div>
+{% endif %}
 <div class="row">
     <div class="col">
         <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addItemModal">Добавить ссылку</button>
