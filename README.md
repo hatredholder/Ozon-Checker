@@ -1,6 +1,8 @@
 # Ozon Price Checker
 
-Made on Django with the use of BeautifulSoup and Selenium.
+Ozon.ru price checker.
+
+Made with Django 4.0, BeautifulSoup and Selenium.
 
 # To do/to add:
 
