@@ -1,6 +1,12 @@
 # Ozon Price Checker
 
-Made on Django with the use of BeautifulSoup and Selenium.
+OZON.ru price checker.
+
+Functionality: Add a URL to track; Update all URLS; Check discounted items; Delete a URL.
+
+Frontend: CSS, Bootstrap 5.1.
+
+Backend: Django 4.0, BeautifulSoup and Selenium.
 
 # To do/to add:
 
