@@ -16,6 +16,7 @@ def home_view(request):
         try:
             form_name, form_current_price = get_info(form['url'].value())
             form = form.save(commit=False)
+            form.url = "/".join(form.url.split('/')[:5])[1:]
             form.name, form.current_price = form_name, form_current_price
             form.save()
         except AttributeError:
