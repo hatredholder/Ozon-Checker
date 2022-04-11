@@ -1,6 +1,8 @@
 # Ozon Price Checker
 
-OZON.ru price checker. Interface written in Russian.
+OZON.ru price checker. 
+
+Interface written in Russian.
 
 Functionality: Add a URL to track; Update all URLS; Check discounted items; Delete a URL.
 
