@@ -1,6 +1,6 @@
 # Ozon Price Checker
 
-OZON.ru price checker. 
+OZON.ru price checker/tracker. 
 
 Interface written in Russian.
 
