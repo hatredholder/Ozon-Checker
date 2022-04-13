@@ -10,7 +10,7 @@ Frontend: CSS, Bootstrap 5.1.
 
 Backend: Django 4.0, BeautifulSoup and Selenium.
 
-# To do/to add:
+# To Do/To Add:
 
 Update logic so it will be inside the views.py instead of the save method Link model,
 add multiprocessing so updating items price will be faster;
