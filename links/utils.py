@@ -1,14 +1,12 @@
 import time
-import os
+
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from fake_useragent import UserAgent
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 def get_info(url):
-    cwd = os.getcwd()
-    driver_dir = cwd + "\chromedriver\chromedriver.exe"
     useragent = UserAgent()
 
     options = webdriver.ChromeOptions()
@@ -16,9 +14,8 @@ def get_info(url):
     options.add_argument('headless')
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--ignore-ssl-errors')
-    service = Service(driver_dir)
 
-    driver = webdriver.Chrome(service=service, options=options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     try:
         driver.get(url)
