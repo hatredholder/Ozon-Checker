@@ -1,10 +1,13 @@
 from multiprocessing import Pool
+
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
+
 from .forms import AddLinkForm
 from .models import Link
 from .utils import get_info
+
 
 def home_view(request):
     no_discounted = 0
