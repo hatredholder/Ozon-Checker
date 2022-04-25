@@ -12,8 +12,7 @@ Backend: Django 4.0, BeautifulSoup and Selenium.
 
 # To Do/To Add:
 
-Update logic so it will be inside the views.py instead of the save method Link model,
-add multiprocessing so updating items price will be faster;
+Update save method logic, add multiprocessing so updating items price will be faster;
 ✓ Done (28.03.22)
 
 Update delete confirm template; 
