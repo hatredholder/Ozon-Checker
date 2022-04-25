@@ -1,14 +1,14 @@
 import time
+import os
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from fake_useragent import UserAgent
 
 
 def get_info(url):
+    cwd = os.getcwd()
+    driver_dir = cwd + "\chromedriver\chromedriver.exe"
     useragent = UserAgent()
 
     options = webdriver.ChromeOptions()
@@ -16,7 +16,7 @@ def get_info(url):
     options.add_argument('headless')
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--ignore-ssl-errors')
-    service = Service("D:\Старый диск 1\Programming\Python\Selenium\chromedriver\chromedriver.exe")
+    service = Service(driver_dir)
 
     driver = webdriver.Chrome(service=service, options=options)
 
