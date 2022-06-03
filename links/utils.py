@@ -7,6 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 def get_info(url):
+    """Get info from URL using Selenium"""
     useragent = UserAgent()
 
     options = webdriver.ChromeOptions()

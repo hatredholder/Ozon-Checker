@@ -10,11 +10,13 @@ from .utils import get_info
 
 
 def home_view(request):
+    """Home view"""
     no_discounted = 0
     error = None
 
     form = AddLinkForm(request.POST or None)
 
+    # Add a URL
     if request.method == 'POST':
         try:
             form_name, form_current_price = get_info(form['url'].value())
@@ -32,6 +34,7 @@ def home_view(request):
     qs = Link.objects.all()
     items_no = qs.count()
 
+    # Add item to discount list
     discount_list = []
     if items_no > 0:
         for item in qs:
@@ -51,13 +54,16 @@ def home_view(request):
     return render(request, 'links/main.html', context)
 
 class LinkDeleteView(DeleteView):
+    """URL Deletion view"""
     model = Link
     success_url = reverse_lazy('home')
 
 def update_prices(request):
+    """Update all the prices view"""
     qs = Link.objects.all()
     links = []
 
+    # Updating the prices with the use of multiprocessing
     for i in qs:
         links.append(i.url)
     p = Pool(processes=len(links))
