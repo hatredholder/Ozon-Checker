@@ -10,6 +10,8 @@ Frontend: CSS, Bootstrap 5.1.
 
 Backend: Django 4.0, BeautifulSoup and Selenium.
 
+Database: SQLite.
+
 # To Do/To Add:
 
 Update save method logic, add multiprocessing so updating items price will be faster;
