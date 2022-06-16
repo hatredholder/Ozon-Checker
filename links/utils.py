@@ -26,8 +26,8 @@ def get_info(url):
         price = int("".join([i for i in soup.find(attrs={"slot":"content"}).next_element.next_sibling.next_element.next_element.next_element.text if i.isnumeric()]))
         return name, price
 
-    except Exception:
-        pass
+    except Exception as e:
+        print(e)
     finally:
         driver.close()
         driver.quit()
