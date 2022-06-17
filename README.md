@@ -23,7 +23,7 @@ Backend: Django 4.0 and Requests library.
 
 Database: SQLite.
 
-## To Do/To Add:
+## To Do/To Add
 
 - [x]  Update delete confirm template; 
 
