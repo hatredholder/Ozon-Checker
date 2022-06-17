@@ -4,7 +4,7 @@
 
 A Price Checker/Tracker for [OZON.ru](ozon.ru). Gets data from their consumer API. 
 
-Interface written in Russian, comments written in English.
+User Interface written in Russian, comments written in English.
 
 ## Preview
 
