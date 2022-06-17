@@ -19,14 +19,16 @@ def home_view(request):
     # Add a URL
     if request.method == 'POST':
         try:
-            form_name, form_current_price = get_info(form['url'].value())
+            form_name, form_current_price = get_info(form['url'].value().split('/')[4])
             form = form.save(commit=False)
             form.url = "/".join(form.url.split('/')[:5])
             form.name, form.current_price = form_name, form_current_price
             form.save()
-        except AttributeError:
+        except AttributeError as e:
+            print(e)
             error = "Ой! Не удалось получить название или цену товара.."
-        except: 
+        except Exception as e: 
+            print(e)
             error = "Ой! Ссылка которую вы ввели недействительна.."
     
     form = AddLinkForm()
@@ -61,14 +63,12 @@ class LinkDeleteView(DeleteView):
 def update_prices(request):
     """Update all the prices view"""
     qs = Link.objects.all()
-    links = []
+    result = []
 
     # Updating the prices with the use of multiprocessing
     for i in qs:
-        links.append(i.url)
-    p = Pool(processes=len(links))
-    result = p.map(get_info, links)
-    p.close()
+        result.append(get_info(i.url.split('/')[4]))
+
     num = 0
     for i in qs:
         if result[num][1] != i.current_price:

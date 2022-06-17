@@ -1,33 +1,32 @@
-import time
+import requests
+import json
 
-from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 
 
-def get_info(url):
+def get_info(product_name):
     """Get info from URL using Selenium"""
     useragent = UserAgent()
 
-    options = webdriver.ChromeOptions()
-    options.add_argument(f"user-agent={useragent.opera}")
-    options.add_argument('headless')
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--ignore-ssl-errors')
-
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    headers = {
+        'User-Agent': useragent.opera,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+    }
 
     try:
-        driver.get(url)
-        time.sleep(5)
-        soup = BeautifulSoup(driver.page_source, "lxml")
-        name = soup.find(attrs={"data-widget":"webProductHeading"}).next_element.text.strip()
-        price = int("".join([i for i in soup.find(attrs={"slot":"content"}).next_element.next_sibling.next_element.next_element.next_element.text if i.isnumeric()]))
+        r = requests.get(f"https://www.ozon.ru/api/composer-api.bx/page/json/v2?url=%2Fproduct%2F{product_name}", headers=headers)
+        
+        name = json.loads(r.json().get("widgetStates").get("webCharacteristics-545710-default-1")).get("productTitle")
+
+        result = []
+        for i in json.loads(r.json().get("widgetStates").get("webPrice-952422-default-1")).get("price"):
+            if i.isnumeric():
+                result.append(i)
+        price = int("".join(result))
+
         return name, price
 
     except Exception as e:
         print(e)
-    finally:
-        driver.close()
-        driver.quit()
+
