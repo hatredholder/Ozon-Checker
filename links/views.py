@@ -19,17 +19,18 @@ def home_view(request):
     # Add a URL
     if request.method == 'POST':
         try:
-            form_name, form_current_price = get_info(form['url'].value().split('/')[4])
+            form_name, form_current_price = get_info(product_name=form['url'].value().split('/')[4])
             form = form.save(commit=False)
+
+            # Get a clean url
             form.url = "/".join(form.url.split('/')[:5])
+
             form.name, form.current_price = form_name, form_current_price
             form.save()
         except AttributeError as e:
-            print(e)
             error = "Ой! Не удалось получить название или цену товара.."
         except Exception as e: 
-            print(e)
-            error = "Ой! Ссылка которую вы ввели недействительна.."
+            error = "Ой! Произошла неизвестная ошибка, стоит попробовать ещё раз."
     
     form = AddLinkForm()
 
@@ -65,10 +66,10 @@ def update_prices(request):
     qs = Link.objects.all()
     result = []
 
-    # Updating the prices with the use of multiprocessing
     for i in qs:
-        result.append(get_info(i.url.split('/')[4]))
+        result.append(get_info(product_name=i.url.split('/')[4]))
 
+    # Updating the prices 
     num = 0
     for i in qs:
         if result[num][1] != i.current_price:
