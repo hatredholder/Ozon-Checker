@@ -11,7 +11,6 @@
 <div class="row">
     <div class="col">
         <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addItemModal">Добавить ссылку</button>
-        <a href="{% url 'update-prices' %}"><button class="btn btn-info">Обновить цены</button></a>
         <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#discountedItemsModal">Товары по скидке</button>
     </div>
     <div class="col" style="text-align:right">
@@ -26,6 +25,7 @@
         <div class="card-header">
             <h5>{{item.name}}</h5>
             <a href="{% url 'delete' item.pk %}"class="btn btn-danger">Удалить</a>
+            <a href="{% url 'update' item.pk %}"class="btn btn-info">Обновить</a>
         </div>
         <div class="card-body">
             <div class="blockquote">
@@ -35,7 +35,7 @@
                 <div>URL Ссылка: <a href="{{item.url}}">{{item.url}}</a></div>
             </div>
         </div>
-        </div>
+    </div>
     {% endfor %}
 {% else %}
     <h3>Нет отслеживаемых предметов..</h3>

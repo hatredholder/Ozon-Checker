@@ -59,23 +59,16 @@ class LinkDeleteView(DeleteView):
     model = Link
     success_url = reverse_lazy('home')
 
-def update_prices(request):
-    """Update all the prices view"""
-    qs = Link.objects.all()
-    result = []
-
-    # Get product_name (needed in utils.py)
-    for i in qs:
-        result.append(get_info(product_name=i.url.split('/')[4]))
+def update_prices(request, pk):
+    """Update a price view"""
+    link_object = Link.objects.get(pk=pk)
+    updated_info = get_info(product_name=link_object.url.split('/')[4])
 
     # Updating the prices 
-    num = 0
-    for i in qs:
-        if result[num][1] != i.current_price:
-            i.old_price = i.current_price
-            i.current_price = result[num][1]
-            diff = result[num][1] - i.old_price
-            i.price_difference = round(diff, 2)
-            i.save()
-        num += 1
+    if updated_info[1] != link_object.current_price:
+        link_object.old_price = link_object.current_price
+        link_object.current_price = updated_info[1]
+        diff = updated_info[1] - link_object.old_price
+        link_object.price_difference = round(diff, 2)
+        link_object.save()
     return redirect('home')
