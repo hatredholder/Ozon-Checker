@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Link(models.Model):
+    """URL Link Info Model"""
     name = models.CharField(max_length=220, blank=True)
     url = models.URLField()
     current_price = models.FloatField(blank=True)

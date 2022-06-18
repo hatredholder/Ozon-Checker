@@ -1,5 +1,3 @@
-from multiprocessing import Pool
-
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
@@ -66,6 +64,7 @@ def update_prices(request):
     qs = Link.objects.all()
     result = []
 
+    # Get product_name (needed in utils.py)
     for i in qs:
         result.append(get_info(product_name=i.url.split('/')[4]))
 

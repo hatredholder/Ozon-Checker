@@ -8,6 +8,7 @@ def get_info(**kwargs):
     """Get info from the API of requested item"""
     
     for _, product_name in kwargs.items():
+        print(product_name)
         
         # Create a fake user agent
         useragent = UserAgent()
