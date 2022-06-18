@@ -1,37 +1,32 @@
 # Ozon Price Checker
 
-OZON.ru price checker/tracker. 
+:cityscape: :cityscape: :cityscape:
 
-Interface written in Russian, comments written in English.
+A Price Checker/Tracker for [OZON.ru](ozon.ru). Gets data from their consumer API. 
 
-Functionality: Add a URL to track; Update all URLS; Check discounted items; Delete a URL.
+User Interface written in Russian, comments written in English.
 
-Frontend: CSS, Bootstrap 5.1.
-
-Backend: Django 4.0, BeautifulSoup and Selenium.
-
-Database: SQLite.
-
-# To Do/To Add:
-
-Update save method logic, add multiprocessing so updating items price will be faster;
-✓ Done (28.03.22)
-
-Update delete confirm template; 
-✓ Done (23.03.22)
-
-Add cancel functionality to delete; 
-✓ Done (08.03.22)
-
-Add a discounted items list page/modal; 
-✓ Done (07.03.22)
-
-# Preview:
+## Preview
 
 ![ozon_checker_1](https://user-images.githubusercontent.com/86254474/159653407-562ca01a-0a84-4e09-89cc-19566a6480b4.png)
 
-![ozon_checker_2](https://user-images.githubusercontent.com/86254474/159653450-2d78f430-e60a-4175-a69a-10dbebdbfc44.png)
+## Instructions
 
-![ozon_checker_3](https://user-images.githubusercontent.com/86254474/159653462-2a8efd2f-6b5c-4762-b0fd-8f32eafb6cb1.png)
+1. Clone this repository
+2. Run the Django server by typing in console `py manage.py runserver`
 
-![ozon_checker_4](https://user-images.githubusercontent.com/86254474/159653421-2db1e83d-8d5f-4314-b9b3-d6b29656e980.png)
+## Technologies 
+
+Frontend: CSS, Bootstrap 5.1.
+
+Backend: Django 4.0 and Requests library.
+
+Database: SQLite.
+
+## To Do/To Add
+
+- [x]  Update delete confirm template; 
+
+- [x]  Add cancel functionality to delete; 
+
+- [x] Add a discounted items list page/modal; 
