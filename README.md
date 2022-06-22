@@ -17,7 +17,7 @@ User Interface written in Russian, comments written in English.
 
 ## Technologies 
 
-Frontend: CSS, Bootstrap 5.1.
+Frontend: CSS, Bootstrap 5.1, a bit of JS.
 
 Backend: Django 4.0 and Requests library.
 
