@@ -14,8 +14,8 @@
         <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#discountedItemsModal">Товары по скидке</button>
     </div>
     <div class="col" style="text-align:right">
-        <div>Количество отслеживаемых товаров: {{items_no}}</div>
-        <div>Товары со скидкой: {{no_discounted}}</div>
+        <div>Количество отслеживаемых товаров: {{items_count}}</div>
+        <div>Товары со скидкой: {{discounted_items_count}}</div>
     </div>
 </div>
 
@@ -24,8 +24,8 @@
     <div class="card mt-3">
         <div class="card-header">
             <h5>{{item.name}}</h5>
-            <a href="{% url 'delete' item.pk %}"class="btn btn-danger">Удалить</a>
-            <a href="{% url 'update' item.pk %}"class="btn btn-info">Обновить</a>
+            <a href="{% url 'delete' item.pk %}" class="delete btn btn-danger">Удалить</a>
+            <a href="{% url 'update' item.pk %}" class="update btn btn-info">Обновить</a>
         </div>
         <div class="card-body">
             <div class="blockquote">
@@ -94,3 +94,16 @@
     </div>
 </div>          
 {% endblock content %}
+{% block scripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            var scrollpos = sessionStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+            sessionStorage.removeItem('scrollpos')
+        });
+
+        window.onbeforeunload = function(e) {
+            sessionStorage.setItem('scrollpos', window.scrollY);
+        };
+    </script>
+{% endblock scripts %}

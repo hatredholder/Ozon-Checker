@@ -9,7 +9,7 @@ from .utils import get_info
 
 def home_view(request):
     """Home view"""
-    no_discounted = 0
+    discounted_items_count = 0
     error = None
 
     form = AddLinkForm(request.POST or None)
@@ -33,20 +33,20 @@ def home_view(request):
     form = AddLinkForm()
 
     qs = Link.objects.all()
-    items_no = qs.count()
+    items_count = qs.count()
 
     # Add item to discount list
     discount_list = []
-    if items_no > 0:
+    if items_count > 0:
         for item in qs:
             if item.old_price > item.current_price:
                 discount_list.append(item)
-            no_discounted = len(discount_list)
+            discounted_items_count = len(discount_list)
 
     context = {
         'qs':qs,
-        'items_no':items_no,
-        'no_discounted':no_discounted,
+        'items_count':items_count,
+        'discounted_items_count':discounted_items_count,
         'discount_list': discount_list,
         'form':form,
         'error':error
@@ -59,12 +59,12 @@ class LinkDeleteView(DeleteView):
     model = Link
     success_url = reverse_lazy('home')
 
-def update_prices(request, pk):
+def update_price(request, pk):
     """Update a price view"""
     link_object = Link.objects.get(pk=pk)
     updated_info = get_info(product_name=link_object.url.split('/')[4])
 
-    # Updating the prices 
+    # Updating the prices in the database
     if updated_info[1] != link_object.current_price:
         link_object.old_price = link_object.current_price
         link_object.current_price = updated_info[1]
