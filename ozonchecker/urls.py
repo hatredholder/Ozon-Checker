@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from links.views import home_view, update_price, LinkDeleteView
+from links.views import LinkDeleteView, home_view, update_price
 
 urlpatterns = [
     path('admin/', admin.site.urls),
