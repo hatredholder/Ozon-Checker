@@ -1,7 +1,6 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
-from regex import W
 
 from .forms import AddLinkForm
 from .models import Link
@@ -9,7 +8,10 @@ from .utils import get_info
 
 
 def home_view(request):
-    """Home view"""
+    """
+    Home View that shows added 
+    links and accepts POST requests
+    """
     discounted_items_count = 0
     error = None
 
@@ -26,12 +28,10 @@ def home_view(request):
 
             form.name, form.current_price = form_name, form_current_price
             form.save()
-        except AttributeError as e:
-            error = "Ой! Не удалось получить название или цену товара.."
         except IndexError as e:
             error = "Ой! Ссылка которую вы ввели неверна."
         except Exception as e: 
-            error = "Ой! Произошла неизвестная ошибка, стоит попробовать ещё раз."
+            error = "Ой! Произошла неизвестная ошибка, попробуйте ещё раз."
     
     form = AddLinkForm()
 
@@ -58,12 +58,12 @@ def home_view(request):
     return render(request, 'links/main.html', context)
 
 class LinkDeleteView(DeleteView):
-    """URL Deletion view"""
+    """Generic URL Deletion View"""
     model = Link
     success_url = reverse_lazy('home')
 
 def update_price(request, pk):
-    """Update a price view"""
+    """Update a Price View"""
     link_object = Link.objects.get(pk=pk)
     updated_info = get_info(product_name=link_object.url.split('/')[4])
 
