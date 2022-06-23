@@ -17,7 +17,6 @@ def home_view(request):
 
     # Add a URL
     if request.method == 'POST':
-        (form['url'].value().split('/')[2] != "www.ozon.ru")
         try:
             form_name, form_current_price = get_info(product_name=form['url'].value().split('/')[4])
             form = form.save(commit=False)
@@ -32,7 +31,6 @@ def home_view(request):
         except IndexError as e:
             error = "Ой! Ссылка которую вы ввели неверна."
         except Exception as e: 
-            print(e)
             error = "Ой! Произошла неизвестная ошибка, стоит попробовать ещё раз."
     
     form = AddLinkForm()
