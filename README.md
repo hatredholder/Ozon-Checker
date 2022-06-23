@@ -2,7 +2,7 @@
 
 :cityscape: :cityscape: :cityscape:
 
-A Price Checker/Tracker for [OZON.ru](ozon.ru). Gets data from their consumer API. 
+A Price Checker/Tracker for [OZON.ru](ozon.ru). Gets data from their consumer API. No proxies were used so the access to the API might be blocked after you do too many requests. But you get unblocked quickly enough.
 
 User Interface written in Russian, comments written in English.
 
