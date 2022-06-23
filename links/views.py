@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
+from regex import W
 
 from .forms import AddLinkForm
 from .models import Link
@@ -16,6 +17,7 @@ def home_view(request):
 
     # Add a URL
     if request.method == 'POST':
+        (form['url'].value().split('/')[2] != "www.ozon.ru")
         try:
             form_name, form_current_price = get_info(product_name=form['url'].value().split('/')[4])
             form = form.save(commit=False)
@@ -27,7 +29,10 @@ def home_view(request):
             form.save()
         except AttributeError as e:
             error = "Ой! Не удалось получить название или цену товара.."
+        except IndexError as e:
+            error = "Ой! Ссылка которую вы ввели неверна."
         except Exception as e: 
+            print(e)
             error = "Ой! Произошла неизвестная ошибка, стоит попробовать ещё раз."
     
     form = AddLinkForm()
