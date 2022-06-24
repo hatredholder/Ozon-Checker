@@ -62,7 +62,7 @@ class LinkDeleteView(DeleteView):
     model = Link
     success_url = reverse_lazy('home')
 
-def update_price(request, pk):
+def update_price_view(request, pk):
     """Update a Price View"""
     link_object = Link.objects.get(pk=pk)
     updated_info = get_info(product_name=link_object.url.split('/')[4])
