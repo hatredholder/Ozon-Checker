@@ -26,8 +26,8 @@ Database: SQLite.
 
 ## To Do/To Add
 
-- [x]  Update delete confirm template; 
+- [x] Update delete confirm template; 
 
-- [x]  Add cancel functionality to delete; 
+- [x] Add cancel functionality to delete; 
 
 - [x] Add a discounted items list page/modal; 
