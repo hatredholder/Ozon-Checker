@@ -19,8 +19,10 @@ def get_info(**kwargs):
         }
 
         # Connect to the API
-        r = requests.get(f"https://www.ozon.ru/api/composer-api.bx/page/json/v2?url=%2Fproduct%2F{product_name}", headers=headers)
-        
+        req = requests.Session()
+
+        r = req.get(f"https://www.ozon.ru/api/composer-api.bx/page/json/v2?url=%2Fproduct%2F{product_name}", headers=headers)
+
         # Get the name
         name = json.loads(
             r.json().get("widgetStates").get("webCharacteristics-545710-default-1")
