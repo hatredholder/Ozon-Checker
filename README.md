@@ -13,7 +13,9 @@ User Interface written in Russian, comments written in English.
 ## Instructions
 
 Clone this repository
+
 Start a new Virtualenv, activate it, type in console `pip install -r requirements.txt`
+
 Run the Django Server by typing in console `python manage.py runserver`
 
 ## Technologies 
