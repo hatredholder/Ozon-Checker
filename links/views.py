@@ -9,7 +9,7 @@ from .utils import get_info
 
 def home_view(request):
     """
-    Home View that shows added 
+    Home View that shows added
     links and accepts POST requests
     """
     discounted_items_count = 0
@@ -18,21 +18,23 @@ def home_view(request):
     form = AddLinkForm(request.POST or None)
 
     # Add a URL
-    if request.method == 'POST':
+    if request.method == "POST":
         try:
-            form_name, form_current_price = get_info(product_name=form['url'].value().split('/')[4])
+            form_name, form_current_price = get_info(
+                product_name=form["url"].value().split("/")[4],
+            )
             form = form.save(commit=False)
 
             # Get a clean url
-            form.url = "/".join(form.url.split('/')[:5])
+            form.url = "/".join(form.url.split("/")[:5])
 
             form.name, form.current_price = form_name, form_current_price
             form.save()
-        except IndexError as e:
+        except IndexError:
             error = "Ой! Ссылка которую вы ввели неверна."
-        except Exception as e: 
+        except Exception:
             error = "Ой! Произошла неизвестная ошибка, попробуйте ещё раз."
-    
+
     form = AddLinkForm()
 
     qs = Link.objects.all()
@@ -47,25 +49,28 @@ def home_view(request):
             discounted_items_count = len(discount_list)
 
     context = {
-        'qs':qs,
-        'items_count':items_count,
-        'discounted_items_count':discounted_items_count,
-        'discount_list': discount_list,
-        'form':form,
-        'error':error
+        "qs": qs,
+        "items_count": items_count,
+        "discounted_items_count": discounted_items_count,
+        "discount_list": discount_list,
+        "form": form,
+        "error": error,
     }
 
-    return render(request, 'links/main.html', context)
+    return render(request, "links/main.html", context)
+
 
 class LinkDeleteView(DeleteView):
     """Generic URL Deletion View"""
+
     model = Link
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy("home")
+
 
 def update_price_view(request, pk):
     """Update a Price View"""
     link_object = Link.objects.get(pk=pk)
-    updated_info = get_info(product_name=link_object.url.split('/')[4])
+    updated_info = get_info(product_name=link_object.url.split("/")[4])
 
     # Updating the prices in the database
     if updated_info[1] != link_object.current_price:
@@ -74,4 +79,4 @@ def update_price_view(request, pk):
         diff = updated_info[1] - link_object.old_price
         link_object.price_difference = round(diff, 2)
         link_object.save()
-    return redirect('home')
+    return redirect("home")

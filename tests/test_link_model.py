@@ -1,6 +1,6 @@
-import pytest
-
 from links.models import Link
+
+import pytest
 
 
 @pytest.mark.django_db
