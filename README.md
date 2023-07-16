@@ -34,8 +34,14 @@ Database: SQLite.
 
 ## 📋 To Do
 
+<details>
+
+  <summary>Click to Open</summary>
+
 - [x] Update delete confirm template; 
 
 - [x] Add cancel functionality to delete; 
 
 - [x] Add a discounted items list page/modal; 
+
+</details>
